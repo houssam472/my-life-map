@@ -1,7 +1,7 @@
 # My life map
 
 A simple Leaflet webpage map with places ive visited / lived in.
----
+
 ## Features
 - Add a marker for a specific place.
 - Bind a note popup for each marker (place).
