@@ -7,7 +7,7 @@ A simple Leaflet webpage map with places ive visited / lived in.
 - Bind a note popup for each marker (place).
 
 ## Built with
-HTML, CSS, JavaScript (no frameworks).
+HTML, JavaScript, Leaflet, OpenStreetMap (no frameworks).
 
 ## How to run
 Download the files and open 'index.html' in a browser.
