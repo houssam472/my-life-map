@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@2.0.0-beta.4/dist/leaflet.css">
+	<script type="importmap">
+		{"imports": {"leaflet": "https://cdn.jsdelivr.net/npm/leaflet@2.0.0-beta.4/dist/leaflet.js"}}
+	</script>
+</head>
+<body>
+	<div id="map" style="height: 100vh"></div>
+	<script type="module">
+		import {LeafletMap, TileLayer, Marker} from 'leaflet';
+		const map = new LeafletMap('map').setView([33.240338, -8.494287], 10);
+        new TileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+        let places = [
+            { name: "El Jadida", type: "city", note: "Currently living here", lat: 33.243, lon: -8.4987},
+            { name: "Casablanca", type: "city", note: "Lived here<br>2026", lat: 33.5676, lon: -7.6522},
+            { name: "Had Soualem", type: "city", note: "Lived here<br>2013-2026", lat: 33.4207, lon: -7.8544}
+        ]
+        for (let n of places) {
+            new Marker([n.lat, n.lon]).addTo(map)
+            .bindPopup(n.note)
+        }
+	</script>
+</body>
+</html>
