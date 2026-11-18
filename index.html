@@ -11,20 +11,43 @@
 <body>
 	<div id="map" style="height: 100vh"></div>
 	<script type="module">
-		import {LeafletMap, TileLayer, Marker} from 'leaflet';
-		const map = new LeafletMap('map').setView([33.240338, -8.494287], 10);
+		import {LeafletMap, TileLayer, Marker, Polyline, Circle} from 'leaflet';
+		const map = new LeafletMap('map').setView([33.240338, -8.494287], 6);
         new TileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
+        
         let places = [
-            { name: "El Jadida", type: "city", note: "Currently living here", lat: 33.243, lon: -8.4987},
-            { name: "Casablanca", type: "city", note: "Lived here<br>2026", lat: 33.5676, lon: -7.6522},
-            { name: "Had Soualem", type: "city", note: "Lived here<br>2013-2026", lat: 33.4207, lon: -7.8544}
+            { name: "Had Soualem", type: "Lived", note: "1- Had Soualem<br>Lived here: 2013-2026", lat: 33.4207, lon: -7.8544},
+            { name: "Casablanca", type: "Lived", note: "2- Casablanca<br>Lived here: 2026", lat: 33.5676, lon: -7.6522},
+            { name: "El Jadida", type: "Lived", note: "3- El Jadida<br>Currently living here", lat: 33.243, lon: -8.4987},
+            { name: "Agadir", type: "Visited", note: "Visited several times", lat: 30.4084, lon: -9.5796},
+            { name: "Rabat", type: "Visited", note: "Visited several times", lat: 34.0208, lon: -6.8396},
+            { name: "Marrakech", type: "Visited", note: "Visited several times", lat: 31.622, lon: -7.995},
+            { name: "Essaouira", type: "Visited", note: "Visited once: 2016", lat: 31.5112, lon: -9.7611},
+            { name: "Ben Guerir", type: "Visited", note: "Visited once: 2017", lat: 32.2327, lon: -7.9481},
+            { name: "Ifrane", type: "Visited", note: "Visited twice", lat: 33.5265, lon: -5.1194}
         ]
+
         for (let n of places) {
-            new Marker([n.lat, n.lon]).addTo(map)
-            .bindPopup(n.note)
+            if (n.type === "Lived") {
+                new Marker([n.lat, n.lon]).addTo(map)
+                .bindPopup(n.note)
+            }
+            else if (n.type === "Visited") {
+                new Circle([n.lat, n.lon], {color: "red", radius: "15000"}).addTo(map)
+                .bindPopup(n.note)
+            }
         }
+
+        let Lived = [];
+        for ( let city of places) {
+            if (city.type === "Lived") {
+                Lived.push([city.lat, city.lon]);
+            }
+        } 
+            new Polyline(Lived).addTo(map)
+
 	</script>
 </body>
 </html>
